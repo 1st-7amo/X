@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome =/</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    /* 🌸 ANIMATED BACKGROUND */
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(-45deg, #ffd6e7, #ffc0cb, #ffb6c1, #ffe4ec);
+      background-size: 400% 400%;
+      animation: bgMove 10s ease infinite;
+      padding: 20px;
+    }
+
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ✨ floating particles */
+    .particle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: rgba(255,255,255,0.6);
+      border-radius: 50%;
+      animation: float 8s linear infinite;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* 💎 CARD */
+    .card {
+      position: relative;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(15px);
+      padding: 35px;
+      border-radius: 25px;
+      text-align: center;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+
+    .profile-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #ff69b4;
+      box-shadow: 0 0 20px rgba(255,105,180,0.6);
+    }
+
+    h1 {
+      margin-top: 10px;
+      font-size: 28px;
+    }
+
+    /* 💬 BIO */
+    .bio {
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 15px;
+      background: rgba(255,255,255,0.6);
+      min-height: 60px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* 💚 WhatsApp */
+    .whatsapp-box {
+      margin-top: 20px;
+      padding: 14px 20px;
+      border-radius: 15px;
+      background: linear-gradient(135deg, #25D366, #1ebe5d);
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .whatsapp-box:hover {
+      transform: scale(1.05);
+    }
+
+    /* 🌐 SOCIAL */
+    .socials {
+      margin-top: 20px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .socials a {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.6);
+      text-decoration: none;
+      color: #333;
+      transition: 0.3s;
+    }
+
+    .socials a:hover {
+      background: #ff69b4;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .phone {
+      margin-top: 15px;
+      color: #ff1493;
+      font-weight: bold;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      color: #ff1493;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 🌸 floating particles -->
+  <script>
+    for (let i = 0; i < 25; i++) {
+      let p = document.createElement("div");
+      p.className = "particle";
+      p.style.left = Math.random() * 100 + "vw";
+      p.style.animationDuration = (Math.random() * 5 + 5) + "s";
+      document.body.appendChild(p);
+    }
+  </script>
+
+  <div class="card">
+
+    <img src="X.jpg" class="profile-img">
+
+    <h1>Mohamed</h1>
+
+    <p>Age: 16</p>
+
+    <!-- 💬 BIO -->
+    <div class="bio" id="bio"></div>
+
+    <!-- WhatsApp -->
+    <a href="#" class="whatsapp-box" id="whatsapp">
+      <i class="fa-brands fa-whatsapp"></i>
+      Chat on WhatsApp
+    </a>
+
+    <!-- Social -->
+    <div class="socials">
+      <a href="#" id="insta"><i class="fa-brands fa-instagram"></i> Instagram</a>
+      <a href="#" id="fb"><i class="fa-brands fa-facebook"></i> Facebook</a>
+      <a href="#" id="tiktok"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+    </div>
+
+    <p class="phone" id="phone">📞 01055856967</p>
+
+  </div>
+
+  <div class="footer">
+    Powered by Mohamed 💗
+  </div>
+
+  <script>
+    // 💬 AUTO BIO TYPING
+    const bioText =
+      "Hi, I'm Mohamed 👋 I love coding, creating websites!";
+
+    let i = 0;
+    function typeBio() {
+      if (i < bioText.length) {
+        document.getElementById("bio").innerHTML += bioText.charAt(i);
+        i++;
+        setTimeout(typeBio, 25);
+      }
+    }
+    typeBio();
+
+    // 📞 INFO
+    document.getElementById("phone").innerText = "📞 01055856967";
+
+    document.getElementById("insta").href = "https://instagram.com/mohamed_diab_90";
+    document.getElementById("fb").href = "https://facebook.com/jimmy12088";
+    document.getElementById("tiktok").href = "https://tiktok.com/ZS9LRVcB4GQcQ-8DMtp/";
+
+    // 💚 WhatsApp message
+    let number = "201055856967";
+    let msg = "I love you Mohamed 💗";
+
+    document.getElementById("whatsapp").href =
+      "https://wa.me/" + number + "?text=" + encodeURIComponent(msg);
+  </script>
+
+</body>
+</html>
