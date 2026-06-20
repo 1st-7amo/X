@@ -1,236 +1,604 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Welcome =/</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forever</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: Arial, sans-serif;
     }
 
-    /* 🌸 ANIMATED BACKGROUND */
     body {
+      background-image: url('background.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       min-height: 100vh;
-      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(-45deg, #ffd6e7, #ffc0cb, #ffb6c1, #ffe4ec);
-      background-size: 400% 400%;
-      animation: bgMove 10s ease infinite;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      animation: pageFade 1.5s ease;
       padding: 20px;
     }
 
-    @keyframes bgMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* ✨ floating particles */
-    .particle {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: rgba(255,255,255,0.6);
-      border-radius: 50%;
-      animation: float 8s linear infinite;
-    }
-
-    @keyframes float {
+    @keyframes pageFade {
       from {
-        transform: translateY(100vh) scale(0.5);
-        opacity: 1;
+        opacity: 0;
+        transform: scale(1.03);
       }
       to {
-        transform: translateY(-10vh) scale(1.2);
-        opacity: 0;
+        opacity: 1;
+        transform: scale(1);
       }
     }
 
-    /* 💎 CARD */
-    .card {
-      position: relative;
-      z-index: 10;
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(15px);
-      padding: 35px;
-      border-radius: 25px;
-      text-align: center;
-      width: 100%;
-      max-width: 450px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-    }
-
-    .profile-img {
-      width: 120px;
-      height: 120px;
+    /* Snow background */
+    .snow {
+      position: fixed;
+      top: -10px;
+      width: 10px;
+      height: 10px;
+      background: white;
       border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #ff69b4;
-      box-shadow: 0 0 20px rgba(255,105,180,0.6);
+      opacity: 0.8;
+      animation: fall linear infinite;
+      z-index: 0;
+      pointer-events: none;
     }
 
-    h1 {
-      margin-top: 10px;
-      font-size: 28px;
+    @keyframes fall {
+      0% {
+        transform: translateY(-10px);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(110vh);
+        opacity: 0.2;
+      }
     }
 
-    /* 💬 BIO */
-    .bio {
-      margin-top: 15px;
-      padding: 15px;
-      border-radius: 15px;
-      background: rgba(255,255,255,0.6);
-      min-height: 60px;
-      font-size: 14px;
-      line-height: 1.6;
+    .container,
+    .counter-box {
+      position: relative;
+      z-index: 2;
     }
 
-    /* 💚 WhatsApp */
-    .whatsapp-box {
-      margin-top: 20px;
-      padding: 14px 20px;
-      border-radius: 15px;
-      background: linear-gradient(135deg, #25D366, #1ebe5d);
-      color: white;
-      text-decoration: none;
+    .container {
+      width: 100%;
+      max-width: 1400px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      font-size: 18px;
+      gap: 80px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      animation: floatUp 1.5s ease;
+    }
+
+    @keyframes floatUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .circle-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      animation: softFloat 4s ease-in-out infinite;
+    }
+
+    .circle-box:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .circle-box:nth-child(3) {
+      animation-delay: 1s;
+    }
+
+    @keyframes softFloat {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .circle {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 5px solid #ff4d6d;
+      box-shadow: 0 0 30px rgba(255, 77, 109, 0.35);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: 0.4s ease;
+    }
+
+    .circle:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.35);
+    }
+
+    .circle1 {
+      background-image: url('1.jpg');
+    }
+
+    .circle2 {
+      background-image: url('2.jpg');
+      border-color: #4da6ff;
+      box-shadow: 0 0 30px rgba(77, 166, 255, 0.35);
+    }
+
+    .name {
+      font-size: 34px;
       font-weight: bold;
-      transition: 0.3s;
+      text-shadow: 0 0 10px rgba(255,255,255,0.15);
+      animation: fadeText 2s ease;
     }
 
-    .whatsapp-box:hover {
-      transform: scale(1.05);
+    @keyframes fadeText {
+      from {
+        opacity: 0;
+        letter-spacing: 8px;
+      }
+      to {
+        opacity: 1;
+        letter-spacing: 0;
+      }
     }
 
-    /* 🌐 SOCIAL */
-    .socials {
-      margin-top: 20px;
-      display: grid;
-      gap: 10px;
+    .mariam {
+      color: #ff69b4;
     }
 
-    .socials a {
+    .mohamed {
+      color: #4da6ff;
+    }
+
+    .heart-wrapper {
+      position: relative;
+      width: 240px;
+      height: 240px;
       display: flex;
       justify-content: center;
-      gap: 10px;
-      padding: 12px;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.6);
-      text-decoration: none;
-      color: #333;
-      transition: 0.3s;
+      align-items: center;
     }
 
-    .socials a:hover {
-      background: #ff69b4;
+    .heart {
+      position: relative;
+      width: 170px;
+      height: 170px;
+      background: #ff1744;
+      transform: rotate(-45deg);
+      animation: pulse 1s infinite;
+      box-shadow: 0 0 35px rgba(255, 23, 68, 0.6);
+      z-index: 2;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      background: #ff1744;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -85px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 85px;
+      top: 0;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: rotate(-45deg) scale(1);
+      }
+      50% {
+        transform: rotate(-45deg) scale(1.12);
+        box-shadow: 0 0 45px rgba(255, 23, 68, 0.9);
+      }
+      100% {
+        transform: rotate(-45deg) scale(1);
+      }
+    }
+
+    .mini-heart {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: rgba(255, 105, 180, 0.85);
+      transform: rotate(-45deg);
+      animation: flyHeart 3s linear infinite;
+      z-index: 1;
+    }
+
+    .mini-heart::before,
+    .mini-heart::after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: rgba(255, 105, 180, 0.85);
+      border-radius: 50%;
+    }
+
+    .mini-heart::before {
+      top: -9px;
+      left: 0;
+    }
+
+    .mini-heart::after {
+      left: 9px;
+      top: 0;
+    }
+
+    @keyframes flyHeart {
+      0% {
+        opacity: 0;
+        transform: translateY(20px) rotate(-45deg) scale(0.5);
+      }
+      20% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-100px) rotate(-45deg) scale(1.2);
+      }
+    }
+
+    .h1 { left: 25px; bottom: 40px; animation-delay: 0s; }
+    .h2 { right: 25px; bottom: 30px; animation-delay: 1s; }
+    .h3 { left: 50%; top: 20px; animation-delay: 2s; }
+
+    .counter-box {
+      text-align: center;
       color: white;
-      transform: scale(1.05);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 22px 34px;
+      border-radius: 22px;
+      box-shadow: 0 0 25px rgba(255,255,255,0.08);
+      backdrop-filter: blur(6px);
+      animation: counterFade 2s ease;
+      max-width: 95%;
     }
 
-    .phone {
-      margin-top: 15px;
-      color: #ff1493;
+    @keyframes counterFade {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .counter-title {
+      font-size: 28px;
+      margin-bottom: 12px;
+      color: #ffb6d9;
       font-weight: bold;
     }
 
-    .footer {
-      position: fixed;
-      bottom: 10px;
-      width: 100%;
-      text-align: center;
-      font-size: 14px;
-      color: #ff1493;
-      opacity: 0.8;
+    .counter {
+      font-size: 34px;
+      font-weight: bold;
+      line-height: 1.8;
+    }
+
+    .counter span {
+      color: #ff4d6d;
+      text-shadow: 0 0 12px rgba(255, 77, 109, 0.6);
+    }
+
+    /* ========================= */
+    /* Laptop / small desktop */
+    /* ========================= */
+    @media (max-width: 1200px) {
+      .container {
+        gap: 50px;
+      }
+
+      .circle {
+        width: 190px;
+        height: 190px;
+      }
+
+      .heart-wrapper {
+        width: 200px;
+        height: 200px;
+      }
+
+      .heart {
+        width: 145px;
+        height: 145px;
+      }
+
+      .heart::before,
+      .heart::after {
+        width: 145px;
+        height: 145px;
+      }
+
+      .heart::before {
+        top: -72px;
+      }
+
+      .heart::after {
+        left: 72px;
+      }
+
+      .name {
+        font-size: 28px;
+      }
+
+      .counter {
+        font-size: 28px;
+      }
+    }
+
+    /* ========================= */
+    /* Tablet */
+    /* ========================= */
+    @media (max-width: 900px) {
+      .container {
+        gap: 30px;
+      }
+
+      .circle {
+        width: 160px;
+        height: 160px;
+      }
+
+      .heart-wrapper {
+        width: 170px;
+        height: 170px;
+      }
+
+      .heart {
+        width: 120px;
+        height: 120px;
+      }
+
+      .heart::before,
+      .heart::after {
+        width: 120px;
+        height: 120px;
+      }
+
+      .heart::before {
+        top: -60px;
+      }
+
+      .heart::after {
+        left: 60px;
+      }
+
+      .name {
+        font-size: 24px;
+      }
+
+      .counter-title {
+        font-size: 22px;
+      }
+
+      .counter {
+        font-size: 24px;
+      }
+    }
+
+    /* ========================= */
+    /* Mobile */
+    /* ========================= */
+    @media (max-width: 600px) {
+      body {
+        padding: 15px;
+      }
+
+      .container {
+        flex-direction: column;
+        gap: 22px;
+        margin-bottom: 25px;
+      }
+
+      .circle-box {
+        gap: 10px;
+      }
+
+      .circle {
+        width: 130px;
+        height: 130px;
+        border-width: 3px;
+      }
+
+      .name {
+        font-size: 22px;
+      }
+
+      .heart-wrapper {
+        width: 130px;
+        height: 130px;
+      }
+
+      .heart {
+        width: 85px;
+        height: 85px;
+      }
+
+      .heart::before,
+      .heart::after {
+        width: 85px;
+        height: 85px;
+      }
+
+      .heart::before {
+        top: -42px;
+      }
+
+      .heart::after {
+        left: 42px;
+      }
+
+      .mini-heart {
+        width: 12px;
+        height: 12px;
+      }
+
+      .mini-heart::before,
+      .mini-heart::after {
+        width: 12px;
+        height: 12px;
+      }
+
+      .mini-heart::before {
+        top: -6px;
+      }
+
+      .mini-heart::after {
+        left: 6px;
+      }
+
+      .counter-box {
+        width: 100%;
+        padding: 16px 14px;
+        border-radius: 18px;
+      }
+
+      .counter-title {
+        font-size: 18px;
+      }
+
+      .counter {
+        font-size: 18px;
+        line-height: 1.7;
+      }
+    }
+
+    /* Very small phones */
+    @media (max-width: 380px) {
+      .circle {
+        width: 110px;
+        height: 110px;
+      }
+
+      .heart {
+        width: 75px;
+        height: 75px;
+      }
+
+      .heart::before,
+      .heart::after {
+        width: 75px;
+        height: 75px;
+      }
+
+      .heart::before {
+        top: -37px;
+      }
+
+      .heart::after {
+        left: 37px;
+      }
+
+      .name {
+        font-size: 20px;
+      }
+
+      .counter {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
-
 <body>
 
-  <!-- 🌸 floating particles -->
-  <script>
-    for (let i = 0; i < 25; i++) {
-      let p = document.createElement("div");
-      p.className = "particle";
-      p.style.left = Math.random() * 100 + "vw";
-      p.style.animationDuration = (Math.random() * 5 + 5) + "s";
-      document.body.appendChild(p);
-    }
-  </script>
-
-  <div class="card">
-
-    <img src="X.jpg" class="profile-img">
-
-    <h1>Mohamed</h1>
-
-    <p>Age: 16</p>
-
-    <!-- 💬 BIO -->
-    <div class="bio" id="bio"></div>
-
-    <!-- WhatsApp -->
-    <a href="#" class="whatsapp-box" id="whatsapp">
-      <i class="fa-brands fa-whatsapp"></i>
-      Chat on WhatsApp
-    </a>
-
-    <!-- Social -->
-    <div class="socials">
-      <a href="#" id="insta"><i class="fa-brands fa-instagram"></i> Instagram</a>
-      <a href="#" id="fb"><i class="fa-brands fa-facebook"></i> Facebook</a>
-      <a href="#" id="tiktok"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+  <div class="container">
+    <div class="circle-box">
+      <div class="circle circle1"></div>
+      <div class="name mariam">Mariam</div>
     </div>
 
-    <p class="phone" id="phone">📞 01055856967</p>
+    <div class="heart-wrapper">
+      <div class="mini-heart h1"></div>
+      <div class="mini-heart h2"></div>
+      <div class="mini-heart h3"></div>
+      <div class="heart"></div>
+    </div>
 
+    <div class="circle-box">
+      <div class="circle circle2"></div>
+      <div class="name mohamed">Mohamed</div>
+    </div>
   </div>
 
-  <div class="footer">
-    Powered by Mohamed 💗
+  <div class="counter-box">
+    <div class="counter-title">Together For</div>
+    <div class="counter" id="counter"></div>
   </div>
 
   <script>
-    // 💬 AUTO BIO TYPING
-    const bioText =
-      "Hi, I'm Mohamed 👋 I love coding, creating websites!";
-
-    let i = 0;
-    function typeBio() {
-      if (i < bioText.length) {
-        document.getElementById("bio").innerHTML += bioText.charAt(i);
-        i++;
-        setTimeout(typeBio, 25);
-      }
+    // Snow effect
+    for (let i = 0; i < 70; i++) {
+      const snow = document.createElement("div");
+      snow.classList.add("snow");
+      snow.style.left = Math.random() * 100 + "vw";
+      snow.style.width = snow.style.height = (Math.random() * 6 + 4) + "px";
+      snow.style.animationDuration = (Math.random() * 6 + 5) + "s";
+      snow.style.animationDelay = Math.random() * 5 + "s";
+      snow.style.opacity = Math.random();
+      document.body.appendChild(snow);
     }
-    typeBio();
 
-    // 📞 INFO
-    document.getElementById("phone").innerText = "📞 01055856967";
+    // Counter start: 255 days + 21 hours ago
+    let startTime = new Date();
+    startTime.setDate(startTime.getDate() - 255);
+    startTime.setHours(startTime.getHours() - 21);
 
-    document.getElementById("insta").href = "https://instagram.com/mohamed_diab_90";
-    document.getElementById("fb").href = "https://facebook.com/jimmy12088";
-    document.getElementById("tiktok").href = "https://tiktok.com/ZS9LRVcB4GQcQ-8DMtp/";
+    function updateCounter() {
+      let now = new Date();
+      let diff = now - startTime;
 
-    // 💚 WhatsApp message
-    let number = "201055856967";
-    let msg = "caio, Mohamed 💗";
+      let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      let hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      let minutes = Math.floor((diff / (1000 * 60)) % 60);
+      let seconds = Math.floor((diff / 1000) % 60);
 
-    document.getElementById("whatsapp").href =
-      "https://wa.me/" + number + "?text=" + encodeURIComponent(msg);
+      document.getElementById("counter").innerHTML = `
+        <span>${days}</span> Days 
+        <span>${hours}</span> Hours 
+        <span>${minutes}</span> Minutes 
+        <span>${seconds}</span> Seconds
+      `;
+    }
+
+    updateCounter();
+    setInterval(updateCounter, 1000);
   </script>
 
 </body>
